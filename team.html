@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Team | Smart Market Price Board</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#0f2027;
+  --text:white;
+  --card:rgba(255,255,255,0.08);
+  --accent1:#00f5d4;
+  --accent2:#f15bb5;
+}
+
+body.light{
+  --bg:#f4f6f9;
+  --text:#111;
+  --card:rgba(0,0,0,0.05);
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins',sans-serif;
+}
+
+body{
+  background:var(--bg);
+  color:var(--text);
+  transition:0.4s;
+  overflow-x:hidden;
+}
+
+canvas{
+  position:fixed;
+  top:0;
+  left:0;
+  z-index:-1;
+}
+
+nav{
+  position:fixed;
+  width:100%;
+  padding:15px 8%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  background:rgba(0,0,0,0.4);
+  backdrop-filter:blur(10px);
+  z-index:1000;
+}
+
+nav ul{
+  display:flex;
+  list-style:none;
+}
+
+nav ul li{
+  margin-left:25px;
+}
+
+nav a{
+  text-decoration:none;
+  color:var(--text);
+}
+
+nav a:hover{
+  color:var(--accent1);
+}
+
+.toggle{
+  cursor:pointer;
+  padding:5px 12px;
+  background:linear-gradient(90deg,var(--accent1),var(--accent2));
+  border-radius:20px;
+}
+
+section{
+  padding:140px 10%;
+  text-align:center;
+}
+
+h1{
+  font-size:2.5rem;
+  margin-bottom:60px;
+}
+
+.team-container{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:40px;
+}
+
+.team-card{
+  background:var(--card);
+  border-radius:25px;
+  padding:30px 20px;
+  backdrop-filter:blur(12px);
+  transition:0.5s;
+  position:relative;
+  overflow:hidden;
+}
+
+.team-card:hover{
+  transform:translateY(-15px);
+}
+
+.profile-img{
+  width:130px;
+  height:130px;
+  margin:auto;
+  border-radius:50%;
+  overflow:hidden;
+  border:4px solid transparent;
+  background:linear-gradient(90deg,var(--accent1),var(--accent2)) border-box;
+}
+
+.profile-img img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  transition:0.5s;
+}
+
+.team-card:hover .profile-img img{
+  transform:scale(1.15);
+}
+
+.role{
+  margin-top:15px;
+  display:inline-block;
+  padding:5px 15px;
+  background:linear-gradient(90deg,var(--accent1),var(--accent2));
+  border-radius:20px;
+  font-size:0.8rem;
+}
+
+.bio{
+  margin-top:15px;
+  font-size:0.9rem;
+  line-height:1.6;
+}
+
+.skills{
+  margin-top:15px;
+}
+
+.skills span{
+  display:inline-block;
+  margin:5px;
+  padding:5px 10px;
+  font-size:0.75rem;
+  border-radius:15px;
+  background:rgba(255,255,255,0.15);
+}
+
+footer{
+  text-align:center;
+  padding:20px;
+  background:rgba(0,0,0,0.3);
+  margin-top:60px;
+}
+</style>
+</head>
+
+<body>
+
+<canvas id="particles"></canvas>
+
+<nav>
+  <h3>Smart Price Board</h3>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="components.html">Components</a></li>
+    <li><a href="team.html">Team</a></li>
+    <li><a href="papers.html">Paper Review</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    <li><span class="toggle" onclick="toggleMode()">🌙</span></li>
+  </ul>
+</nav>
+
+<section>
+  <h1>Meet Our Team</h1>
+
+  <div class="team-container">
+
+    <!-- Team Member 1 -->
+    <div class="team-card">
+      <div class="profile-img">
+        <img src="images\Syed Hasibul Hasan.jpg" alt="Syed Hasibul Hasan">
+      </div>
+      <h3 style="margin-top:15px;">Syed Hasibul Hasan</h3>
+      <h2 style="margin-top:15px;">2321368</h2>
+      <div class="role">Team Leader & IoT Developer</div>
+      <div class="bio">
+        3rd Year CSE Student at IUB. Passionate about Robotics, IoT systems, and Smart Automation technologies.
+      </div>
+      <div class="skills">
+        <span>Python</span>
+        <span>ESP8266</span>
+        <span>Arduino</span>
+        <span>IoT</span>
+      </div>
+    </div>
+
+    <!-- Team Member 2 -->
+     <div class="team-card">
+      <div class="profile-img">
+        <img src="images\Md. Easir Arafat Porosh.jpg" alt="Md. Easir Arafat Porosh">
+      </div>
+      <h3 style="margin-top:15px;">Md. Easir Arafat Porosh</h3>
+      <div class="role">Frontend Developer</div>
+      <div class="bio">
+        Designed and developed the admin dashboard and presentation website.
+      </div>
+      <div class="skills">
+        <span>HTML</span>
+        <span>CSS</span>
+        <span>JavaScript</span>
+      </div>
+    </div>
+
+    <!-- Team Member 3 -->
+    <div class="team-card">
+      <div class="profile-img">
+        <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="Turjo Roy">
+      </div>
+      <h3 style="margin-top:15px;">Turjo Roy</h3>
+      <div class="role">Backend Developer</div>
+      <div class="bio">
+        Responsible for API development, database design, and server-side integration.
+      </div>
+      <div class="skills">
+        <span>Flask</span>
+        <span>MySQL</span>
+        <span>REST API</span>
+      </div>
+    </div>
+
+    <!-- Team Member 4 -->
+    <div class="team-card">
+      <div class="profile-img">
+        <img src="https://randomuser.me/api/portraits/men/55.jpg" alt="Rashidul Islam Alif">
+      </div>
+      <h3 style="margin-top:15px;">Rashidul Islam Alif</h3>
+      <div class="role">Mechanical Developer</div>
+      <div class="bio">
+        Designed and developed the Project Prototype.
+      </div>
+      <div class="skills">
+        <span>Fusion 360</span>
+        <span>Proteus</span>
+        <span>ROS</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+© 2026 Smart Market Price Board Research Project | IUB
+</footer>
+
+<script>
+function toggleMode(){
+  document.body.classList.toggle("light");
+}
+
+/* Particle Background */
+const canvas=document.getElementById("particles");
+const ctx=canvas.getContext("2d");
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+
+let particles=[];
+for(let i=0;i<70;i++){
+  particles.push({
+    x:Math.random()*canvas.width,
+    y:Math.random()*canvas.height,
+    size:Math.random()*3,
+    speedX:(Math.random()-0.5),
+    speedY:(Math.random()-0.5)
+  });
+}
+
+function animate(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  particles.forEach(p=>{
+    p.x+=p.speedX;
+    p.y+=p.speedY;
+    ctx.fillStyle="#00f5d4";
+    ctx.beginPath();
+    ctx.arc(p.x,p.y,p.size,0,Math.PI*2);
+    ctx.fill();
+  });
+  requestAnimationFrame(animate);
+}
+animate();
+</script>
+
+</body>
+</html>

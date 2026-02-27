@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Paper Review | Smart Market Price Board</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#0f2027;
+  --text:white;
+  --card:rgba(255,255,255,0.08);
+  --accent1:#00f5d4;
+  --accent2:#f15bb5;
+}
+
+body.light{
+  --bg:#f4f6f9;
+  --text:#111;
+  --card:rgba(0,0,0,0.05);
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins',sans-serif;
+}
+
+body{
+  background:var(--bg);
+  color:var(--text);
+  transition:0.4s;
+  overflow-x:hidden;
+  line-height:1.7;
+}
+
+canvas{
+  position:fixed;
+  top:0;
+  left:0;
+  z-index:-1;
+}
+
+nav{
+  position:fixed;
+  width:100%;
+  padding:15px 8%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  background:rgba(0,0,0,0.4);
+  backdrop-filter:blur(10px);
+  z-index:1000;
+}
+
+nav ul{
+  display:flex;
+  list-style:none;
+}
+
+nav ul li{
+  margin-left:25px;
+}
+
+nav a{
+  text-decoration:none;
+  color:var(--text);
+}
+
+nav a:hover{
+  color:var(--accent1);
+}
+
+.toggle{
+  cursor:pointer;
+  padding:5px 12px;
+  background:linear-gradient(90deg,var(--accent1),var(--accent2));
+  border-radius:20px;
+}
+
+section{
+  padding:140px 10%;
+  max-width:1100px;
+  margin:auto;
+}
+
+h1{
+  font-size:2.5rem;
+  margin-bottom:30px;
+}
+
+h2{
+  margin-top:40px;
+  margin-bottom:15px;
+  color:var(--accent1);
+}
+
+.abstract{
+  background:var(--card);
+  padding:25px;
+  border-radius:15px;
+  margin-bottom:30px;
+}
+
+.paper-card{
+  background:var(--card);
+  padding:20px;
+  border-radius:15px;
+  margin-top:20px;
+}
+
+.table-wrapper{
+  overflow-x:auto;
+  margin-top:20px;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+}
+
+th, td{
+  border:1px solid rgba(255,255,255,0.2);
+  padding:10px;
+  text-align:left;
+}
+
+th{
+  background:rgba(255,255,255,0.1);
+}
+
+.research-gap{
+  margin-top:30px;
+  padding:20px;
+  border-left:5px solid var(--accent2);
+  background:var(--card);
+  border-radius:10px;
+}
+
+footer{
+  text-align:center;
+  padding:20px;
+  background:rgba(0,0,0,0.3);
+  margin-top:60px;
+}
+</style>
+</head>
+
+<body>
+
+<canvas id="particles"></canvas>
+
+<nav>
+  <h3>Smart Price Board</h3>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="components.html">Components</a></li>
+    <li><a href="team.html">Team</a></li>
+    <li><a href="papers.html">Paper Review</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    <li><span class="toggle" onclick="toggleMode()">🌙</span></li>
+  </ul>
+</nav>
+
+<section>
+
+<h1>Literature Review & Research Analysis</h1>
+
+<div class="abstract">
+<strong>Abstract:</strong><br>
+Recent advancements in IoT-based display systems have enabled real-time data visualization in public environments. 
+This section reviews existing smart display systems and centralized digital boards used in commercial and smart city applications.
+</div>
+
+<h2>1. IoT-Based Smart Display Systems</h2>
+<div class="paper-card">
+Several research works demonstrate the use of ESP8266 and ESP32 for real-time data transmission 
+to LED or LCD displays via WiFi. These systems primarily focus on advertisement boards 
+or institutional notice boards.
+</div>
+
+<h2>2. Centralized Monitoring Systems</h2>
+<div class="paper-card">
+Cloud-based dashboards integrated with REST APIs allow remote data updates. 
+However, many implementations target industrial monitoring rather than 
+commodity price transparency in local markets.
+</div>
+
+<h2>3. Comparative Analysis</h2>
+
+<div class="table-wrapper">
+<table>
+<tr>
+<th>System</th>
+<th>Centralized Control</th>
+<th>Low Cost</th>
+<th>Rural Focus</th>
+</tr>
+
+<tr>
+<td>Smart Notice Board (IoT)</td>
+<td>Yes</td>
+<td>Medium</td>
+<td>No</td>
+</tr>
+
+<tr>
+<td>Digital Advertisement Board</td>
+<td>Yes</td>
+<td>High</td>
+<td>No</td>
+</tr>
+
+<tr>
+<td>Proposed System</td>
+<td>Yes</td>
+<td>Low</td>
+<td>Yes</td>
+</tr>
+</table>
+</div>
+
+<h2>4. Identified Research Gap</h2>
+
+<div class="research-gap">
+Most existing systems lack:
+<ul>
+<li>Affordable implementation for rural markets</li>
+<li>Commodity-focused pricing management</li>
+<li>Multi-board centralized synchronization for small-scale environments</li>
+</ul>
+
+Our research addresses these limitations by designing a scalable, low-cost, IoT-based 
+centralized digital price board specifically for local bazaars.
+</div>
+
+<h2>5. Expected Contribution</h2>
+<div class="paper-card">
+This project contributes a practical smart market solution aligned with smart city concepts, 
+ensuring transparency, automation, and cost-effective deployment.
+</div>
+
+</section>
+
+<footer>
+© 2026 Smart Market Price Board Research Project | IUB
+</footer>
+
+<script>
+function toggleMode(){
+  document.body.classList.toggle("light");
+}
+
+/* Particle Background */
+const canvas=document.getElementById("particles");
+const ctx=canvas.getContext("2d");
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+
+let particles=[];
+for(let i=0;i<70;i++){
+  particles.push({
+    x:Math.random()*canvas.width,
+    y:Math.random()*canvas.height,
+    size:Math.random()*3,
+    speedX:(Math.random()-0.5),
+    speedY:(Math.random()-0.5)
+  });
+}
+
+function animate(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  particles.forEach(p=>{
+    p.x+=p.speedX;
+    p.y+=p.speedY;
+    ctx.fillStyle="#00f5d4";
+    ctx.beginPath();
+    ctx.arc(p.x,p.y,p.size,0,Math.PI*2);
+    ctx.fill();
+  });
+  requestAnimationFrame(animate);
+}
+animate();
+</script>
+
+</body>
+</html>

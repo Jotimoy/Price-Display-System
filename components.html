@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Components | Smart Market Price Board</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#0f2027;
+  --text:white;
+  --card:rgba(255,255,255,0.08);
+  --accent1:#00f5d4;
+  --accent2:#f15bb5;
+}
+
+body.light{
+  --bg:#f4f6f9;
+  --text:#111;
+  --card:rgba(0,0,0,0.05);
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins',sans-serif;
+  scroll-behavior:smooth;
+}
+
+body{
+  background:var(--bg);
+  color:var(--text);
+  transition:0.4s;
+  overflow-x:hidden;
+}
+
+canvas{
+  position:fixed;
+  top:0;
+  left:0;
+  z-index:-1;
+}
+
+nav{
+  position:fixed;
+  width:100%;
+  padding:15px 8%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  background:rgba(0,0,0,0.4);
+  backdrop-filter:blur(10px);
+  z-index:1000;
+}
+
+nav ul{
+  display:flex;
+  list-style:none;
+}
+
+nav ul li{
+  margin-left:25px;
+}
+
+nav a{
+  text-decoration:none;
+  color:var(--text);
+}
+
+nav a:hover{
+  color:var(--accent1);
+}
+
+.toggle{
+  cursor:pointer;
+  padding:5px 12px;
+  background:linear-gradient(90deg,var(--accent1),var(--accent2));
+  border-radius:20px;
+}
+
+section{
+  padding:120px 10%;
+}
+
+h1{
+  font-size:2.5rem;
+  margin-bottom:40px;
+}
+
+.card-container{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:30px;
+}
+
+.card{
+  background:var(--card);
+  padding:25px;
+  border-radius:20px;
+  backdrop-filter:blur(12px);
+  transform:translateY(40px);
+  opacity:0;
+  transition:0.8s;
+}
+
+.card.show{
+  transform:translateY(0);
+  opacity:1;
+}
+
+.diagram{
+  margin-top:40px;
+  padding:30px;
+  border-radius:20px;
+  background:var(--card);
+  text-align:center;
+}
+
+footer{
+  text-align:center;
+  padding:20px;
+  background:rgba(0,0,0,0.3);
+  margin-top:60px;
+}
+</style>
+</head>
+
+<body>
+
+<canvas id="particles"></canvas>
+
+<nav>
+  <h3>Smart Price Board</h3>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="components.html">Components</a></li>
+    <li><a href="team.html">Team</a></li>
+    <li><a href="papers.html">Paper Review</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    <li><span class="toggle" onclick="toggleMode()">🌙</span></li>
+  </ul>
+</nav>
+
+<section>
+  <h1>Hardware Components</h1>
+
+  <div class="card-container">
+    <div class="card">
+      <h3>📡 ESP8266 / ESP32</h3>
+      <p>Main IoT microcontroller responsible for WiFi communication and data fetching from the server.</p>
+    </div>
+
+    <div class="card">
+      <h3>🖥 LED Matrix Display</h3>
+      <p>Displays real-time commodity prices in digital format in market areas.</p>
+    </div>
+
+    <div class="card">
+      <h3>🔌 Power Supply Unit</h3>
+      <p>Provides stable voltage supply for continuous operation.</p>
+    </div>
+
+    <div class="card">
+      <h3>📶 WiFi Router</h3>
+      <p>Ensures internet connectivity for real-time centralized updates.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h1>Software Architecture</h1>
+
+  <div class="card-container">
+    <div class="card">
+      <h3>💻 Admin Dashboard</h3>
+      <p>Web-based system for updating daily commodity prices.</p>
+    </div>
+
+    <div class="card">
+      <h3>🗄 Cloud Database</h3>
+      <p>Stores updated price data securely (Firebase / MySQL).</p>
+    </div>
+
+    <div class="card">
+      <h3>🔗 REST API</h3>
+      <p>Handles communication between server and IoT devices.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h1>System Flow Diagram</h1>
+
+  <div class="diagram">
+    <p>
+      Admin Panel → Cloud Server → Internet → ESP8266 → LED Display
+    </p>
+    <br>
+    <p>
+      The administrator updates prices from the dashboard. 
+      Data is stored in the cloud database and automatically fetched 
+      by connected IoT boards via WiFi.
+    </p>
+  </div>
+</section>
+
+<footer>
+© 2026 Smart Market Price Board Research Project | IUB
+</footer>
+
+<script>
+function toggleMode(){
+  document.body.classList.toggle("light");
+}
+
+const cards=document.querySelectorAll(".card");
+window.addEventListener("scroll",()=>{
+  cards.forEach(card=>{
+    if(card.getBoundingClientRect().top < window.innerHeight-50){
+      card.classList.add("show");
+    }
+  });
+});
+
+/* Particle Background */
+const canvas=document.getElementById("particles");
+const ctx=canvas.getContext("2d");
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+
+let particles=[];
+for(let i=0;i<70;i++){
+  particles.push({
+    x:Math.random()*canvas.width,
+    y:Math.random()*canvas.height,
+    size:Math.random()*3,
+    speedX:(Math.random()-0.5),
+    speedY:(Math.random()-0.5)
+  });
+}
+
+function animate(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  particles.forEach(p=>{
+    p.x+=p.speedX;
+    p.y+=p.speedY;
+    ctx.fillStyle="#00f5d4";
+    ctx.beginPath();
+    ctx.arc(p.x,p.y,p.size,0,Math.PI*2);
+    ctx.fill();
+  });
+  requestAnimationFrame(animate);
+}
+animate();
+</script>
+
+</body>
+</html>
