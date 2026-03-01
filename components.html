@@ -148,25 +148,67 @@ footer{
   <h1>Hardware Components</h1>
 
   <div class="card-container">
+
     <div class="card">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/7/75/NodeMCU_DEVKIT_1.0.jpg" width="100%" style="border-radius:15px; margin-bottom:15px;">
       <h3>📡 ESP8266 / ESP32</h3>
-      <p>Main IoT microcontroller responsible for WiFi communication and data fetching from the server.</p>
+      <p>
+        Core IoT microcontroller responsible for WiFi communication.
+        Fetches real-time price data from the cloud server and updates display instantly.
+        Low cost, low power, highly reliable for IoT systems.
+      </p>
     </div>
 
     <div class="card">
-      <h3>🖥 LED Matrix Display</h3>
-      <p>Displays real-time commodity prices in digital format in market areas.</p>
+      <img src="https://m.media-amazon.com/images/I/61Xwz+2Xf4L._SL1000_.jpg" width="100%" style="border-radius:15px; margin-bottom:15px;">
+      <h3>🖥 P10 LED Matrix Display</h3>
+      <p>
+        Digital outdoor display panel used to show commodity prices.
+        High brightness, suitable for market environments.
+        Can display scrolling text, multiple items, and animations.
+      </p>
     </div>
 
     <div class="card">
-      <h3>🔌 Power Supply Unit</h3>
-      <p>Provides stable voltage supply for continuous operation.</p>
+      <img src="https://5.imimg.com/data5/SELLER/Default/2022/7/QR/PN/WV/135969547/5v-40a-smps-power-supply.jpg" width="100%" style="border-radius:15px; margin-bottom:15px;">
+      <h3>🔌 5V 40A SMPS Power Supply</h3>
+      <p>
+        Provides stable voltage for LED panels.
+        Ensures continuous operation without flickering.
+        Required because P10 panels consume high current.
+      </p>
     </div>
 
     <div class="card">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/6/60/WiFi_Router.jpg" width="100%" style="border-radius:15px; margin-bottom:15px;">
       <h3>📶 WiFi Router</h3>
-      <p>Ensures internet connectivity for real-time centralized updates.</p>
+      <p>
+        Provides internet connectivity to IoT boards.
+        Enables centralized real-time price updates.
+        Essential for communication between cloud and display units.
+      </p>
     </div>
+
+    <div class="card">
+      <img src="https://m.media-amazon.com/images/I/71pSgk5vM7L._SL1500_.jpg" width="100%" style="border-radius:15px; margin-bottom:15px;">
+      <h3>⏰ RTC Module (Optional)</h3>
+      <p>
+        Real Time Clock module for displaying date & time.
+        Maintains accurate time even during power failure.
+        Adds professionalism to display system.
+      </p>
+    </div>
+
+    <div class="card">
+      <img src="https://m.media-amazon.com/images/I/61l8gE8zKzL._SL1000_.jpg" width="100%" style="border-radius:15px; margin-bottom:15px;">
+      <h3>🌡 Temperature Sensor (Optional)</h3>
+      <p>
+        Displays live temperature of market environment.
+        Adds smart city feature.
+        Useful for extended smart market analytics.
+      </p>
+    </div>
+
   </div>
 </section>
 
@@ -174,20 +216,37 @@ footer{
   <h1>Software Architecture</h1>
 
   <div class="card-container">
+
     <div class="card">
+      <img src="https://miro.medium.com/max/1400/1*VnW5qzY8ZndKyGKoE9pQ5Q.png" width="100%" style="border-radius:15px; margin-bottom:15px;">
       <h3>💻 Admin Dashboard</h3>
-      <p>Web-based system for updating daily commodity prices.</p>
+      <p>
+        Web-based control panel for updating commodity prices.
+        Built using HTML, CSS, JavaScript and optionally Flask/Django.
+        Provides authentication and secure access.
+      </p>
     </div>
 
     <div class="card">
+      <img src="https://firebase.google.com/images/social.png" width="100%" style="border-radius:15px; margin-bottom:15px;">
       <h3>🗄 Cloud Database</h3>
-      <p>Stores updated price data securely (Firebase / MySQL).</p>
+      <p>
+        Stores updated price information securely.
+        Can use Firebase for real-time sync or MySQL for structured storage.
+        Ensures centralized data management.
+      </p>
     </div>
 
     <div class="card">
+      <img src="https://miro.medium.com/max/1400/1*QdVqB7wEXpC4LhXlGzVhJw.png" width="100%" style="border-radius:15px; margin-bottom:15px;">
       <h3>🔗 REST API</h3>
-      <p>Handles communication between server and IoT devices.</p>
+      <p>
+        Enables communication between cloud server and IoT devices.
+        Devices fetch updated data periodically using HTTP requests.
+        Ensures reliable real-time update mechanism.
+      </p>
     </div>
+
   </div>
 </section>
 
@@ -258,4 +317,5 @@ animate();
 </script>
 
 </body>
+
 </html>
