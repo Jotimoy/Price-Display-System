@@ -274,6 +274,19 @@ animate();
 <audio id="typingSound" src="typing.mov"></audio>
 
 <script src="script.js"></script>
+const typingSound = document.getElementById("typingSound");
+
+document.querySelectorAll("input").forEach(input => {
+
+input.addEventListener("keydown", () => {
+
+typingSound.currentTime = 0;
+typingSound.play();
+
+});
+
+});
 </body>
 
 </html>
+
