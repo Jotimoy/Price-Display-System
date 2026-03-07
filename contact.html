@@ -270,23 +270,24 @@ function animate(){
   requestAnimationFrame(animate);
 }
 animate();
-</script>
-<audio id="typingSound" src="typing.mov"></audio>
 
-<script src="script.js"></script>
+/* Typing Sound */
 const typingSound = document.getElementById("typingSound");
 
-document.querySelectorAll("input").forEach(input => {
+document.querySelectorAll("input, textarea").forEach(input => {
 
-input.addEventListener("keydown", () => {
+  input.addEventListener("keydown", () => {
 
-typingSound.currentTime = 0;
-typingSound.play();
+    typingSound.currentTime = 0;
+    typingSound.play();
+
+  });
 
 });
-
-});
+</script>
+<audio id="typingSound" src="typing.mov" preload="auto"></audio>
 </body>
 
 </html>
+
 
