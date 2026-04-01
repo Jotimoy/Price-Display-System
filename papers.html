@@ -3,256 +3,192 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Paper Review | Smart Market Price Board</title>
+<title>Research Dashboard | Smart Market Price Board</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
 :root{
   --bg:#0f2027;
+  --card:#1c2b33;
   --text:white;
-  --card:rgba(255,255,255,0.08);
-  --accent1:#00f5d4;
-  --accent2:#f15bb5;
-}
-
-body.light{
-  --bg:#f4f6f9;
-  --text:#111;
-  --card:rgba(0,0,0,0.05);
-}
-
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:'Poppins',sans-serif;
+  --accent:#00f5d4;
 }
 
 body{
+  margin:0;
+  font-family:'Poppins',sans-serif;
   background:var(--bg);
   color:var(--text);
-  transition:0.4s;
-  overflow-x:hidden;
-  line-height:1.7;
-}
-
-canvas{
-  position:fixed;
-  top:0;
-  left:0;
-  z-index:-1;
 }
 
 nav{
-  position:fixed;
-  width:100%;
   padding:15px 8%;
   display:flex;
   justify-content:space-between;
-  align-items:center;
-  background:rgba(0,0,0,0.4);
-  backdrop-filter:blur(10px);
-  z-index:1000;
-}
-
-nav ul{
-  display:flex;
-  list-style:none;
-}
-
-nav ul li{
-  margin-left:25px;
+  background:#00000070;
+  position:sticky;
+  top:0;
 }
 
 nav a{
+  color:white;
   text-decoration:none;
-  color:var(--text);
+  margin-left:20px;
 }
 
-nav a:hover{
-  color:var(--accent1);
-}
-
-.toggle{
-  cursor:pointer;
-  padding:5px 12px;
-  background:linear-gradient(90deg,var(--accent1),var(--accent2));
-  border-radius:20px;
-}
-
-section{
-  padding:140px 10%;
-  max-width:1100px;
-  margin:auto;
+.container{
+  padding:100px 10%;
 }
 
 h1{
-  font-size:2.5rem;
-  margin-bottom:30px;
+  text-align:center;
+  margin-bottom:40px;
 }
 
-h2{
-  margin-top:40px;
-  margin-bottom:15px;
-  color:var(--accent1);
+.search-box{
+  text-align:center;
+  margin-bottom:40px;
 }
 
-.abstract{
-  background:var(--card);
-  padding:25px;
-  border-radius:15px;
-  margin-bottom:30px;
+.search-box input{
+  width:60%;
+  padding:12px;
+  border:none;
+  border-radius:25px;
+  outline:none;
 }
 
-.paper-card{
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:20px;
+}
+
+.card{
   background:var(--card);
   padding:20px;
   border-radius:15px;
-  margin-top:20px;
+  transition:0.3s;
+  position:relative;
 }
 
-.table-wrapper{
-  overflow-x:auto;
-  margin-top:20px;
+.card:hover{
+  transform:translateY(-10px);
+  box-shadow:0 10px 30px rgba(0,255,200,0.3);
 }
 
-table{
+.card h3{
+  margin-bottom:10px;
+}
+
+.btn{
+  display:inline-block;
+  margin-top:10px;
+  padding:8px 15px;
+  border-radius:20px;
+  background:var(--accent);
+  color:black;
+  text-decoration:none;
+}
+
+.preview{
+  margin-top:60px;
+}
+
+iframe{
   width:100%;
-  border-collapse:collapse;
-}
-
-th, td{
-  border:1px solid rgba(255,255,255,0.2);
-  padding:10px;
-  text-align:left;
-}
-
-th{
-  background:rgba(255,255,255,0.1);
-}
-
-.research-gap{
-  margin-top:30px;
-  padding:20px;
-  border-left:5px solid var(--accent2);
-  background:var(--card);
-  border-radius:10px;
+  height:500px;
+  border-radius:15px;
+  border:none;
 }
 
 footer{
   text-align:center;
   padding:20px;
-  background:rgba(0,0,0,0.3);
-  margin-top:60px;
+  margin-top:50px;
+  background:#00000060;
 }
 </style>
 </head>
 
 <body>
 
-<canvas id="particles"></canvas>
-
 <nav>
-  <h3>Smart Price Board</h3>
-  <ul>
-    <li><a href="index.html">Home</a></li>
-    <li><a href="components.html">Components</a></li>
-    <li><a href="team.html">Team</a></li>
-    <li><a href="papers.html">Paper Review</a></li>
-    <li><a href="contact.html">Contact</a></li>
-    <li><span class="toggle" onclick="toggleMode()">🌙</span></li>
-  </ul>
+  <h3>📊 Smart Price Board</h3>
+  <div>
+    <a href="index.html">Home</a>
+    <a href="papers.html">Papers</a>
+  </div>
 </nav>
 
-<section>
+<div class="container">
 
-<h1>📚 Literature Review Papers</h1>
+<h1>📚 Research Paper Dashboard</h1>
 
-<div class="abstract">
-<strong>Overview:</strong><br>
-This section presents 40 research papers divided into 4 groups. Each document contains 10 papers with detailed literature review analysis.
+<div class="search-box">
+<input type="text" id="search" placeholder="🔍 Search papers..." onkeyup="searchCards()">
 </div>
 
-<!-- TEAM MEMBER 1 -->
-<h2>👨‍💻 Member 1 – Papers 1–10</h2>
-<div class="paper-card">
-<p>Contains first 10 research papers focusing on IoT-based display systems, MQTT communication, and ESP32 implementations.</p>
+<div class="grid" id="cards">
 
-<a href="docs/member1.pdf" target="_blank" style="color:#00f5d4;">📄 View Document</a>
+<div class="card">
+<h3>📄 Papers 1–10</h3>
+<p>IoT Display Systems, MQTT, ESP32</p>
+<a class="btn" href="docs/member1.pdf" target="_blank">View</a>
+<a class="btn" onclick="previewPDF('docs/member1.pdf')">Preview</a>
 </div>
 
-<!-- TEAM MEMBER 2 -->
-<h2>👨‍💻 Member 2 – Papers 11–20</h2>
-<div class="paper-card">
-<p>This section includes wireless display systems, cloud integration, and digital signage research.</p>
-
-<a href="docs/member2.pdf" target="_blank" style="color:#00f5d4;">📄 View Document</a>
+<div class="card">
+<h3>📄 Papers 11–20</h3>
+<p>Wireless Display, Cloud Systems</p>
+<a class="btn" href="docs/member2.pdf" target="_blank">View</a>
+<a class="btn" onclick="previewPDF('docs/member2.pdf')">Preview</a>
 </div>
 
-<!-- TEAM MEMBER 3 -->
-<h2>👨‍💻 Member 3 – Papers 21–30</h2>
-<div class="paper-card">
-<p>Focuses on backend architecture, Firebase systems, APIs, and real-time synchronization techniques.</p>
-
-<a href="docs/member3.pdf" target="_blank" style="color:#00f5d4;">📄 View Document</a>
+<div class="card">
+<h3>📄 Papers 21–30</h3>
+<p>Backend, Firebase, APIs</p>
+<a class="btn" href="docs/member3.pdf" target="_blank">View</a>
+<a class="btn" onclick="previewPDF('docs/member3.pdf')">Preview</a>
 </div>
 
-<!-- TEAM MEMBER 4 -->
-<h2>👨‍💻 Member 4 – Papers 31–40</h2>
-<div class="paper-card">
-<p>This section highlights smart market systems, smart city applications, and IoT-based transparency solutions.</p>
-
-<a href="docs/member4.pdf" target="_blank" style="color:#00f5d4;">📄 View Document</a>
+<div class="card">
+<h3>📄 Papers 31–40</h3>
+<p>Smart Market, Smart City</p>
+<a class="btn" href="docs/member4.pdf" target="_blank">View</a>
+<a class="btn" onclick="previewPDF('docs/member4.pdf')">Preview</a>
 </div>
 
-<!-- BONUS: EMBED VIEW -->
-<h2>📖 Quick Preview</h2>
-<div class="paper-card">
-<iframe src="docs/member1.pdf" width="100%" height="500px"></iframe>
 </div>
 
-</section>
+<div class="preview">
+<h2>📖 Live Preview</h2>
+<iframe id="viewer" src="docs/member1.pdf"></iframe>
+</div>
+
+</div>
 
 <footer>
-© 2026 Smart Market Price Board Research Project | IUB
+© 2026 Smart Market Price Board | Research Project
 </footer>
 
 <script>
-function toggleMode(){
-  document.body.classList.toggle("light");
+
+function previewPDF(file){
+  document.getElementById("viewer").src=file;
 }
 
-/* Particle Background */
-const canvas=document.getElementById("particles");
-const ctx=canvas.getContext("2d");
-canvas.width=window.innerWidth;
-canvas.height=window.innerHeight;
+function searchCards(){
+  let input=document.getElementById("search").value.toLowerCase();
+  let cards=document.querySelectorAll(".card");
 
-let particles=[];
-for(let i=0;i<70;i++){
-  particles.push({
-    x:Math.random()*canvas.width,
-    y:Math.random()*canvas.height,
-    size:Math.random()*3,
-    speedX:(Math.random()-0.5),
-    speedY:(Math.random()-0.5)
+  cards.forEach(card=>{
+    let text=card.innerText.toLowerCase();
+    card.style.display=text.includes(input)?"block":"none";
   });
 }
 
-function animate(){
-  ctx.clearRect(0,0,canvas.width,canvas.height);
-  particles.forEach(p=>{
-    p.x+=p.speedX;
-    p.y+=p.speedY;
-    ctx.fillStyle="#00f5d4";
-    ctx.beginPath();
-    ctx.arc(p.x,p.y,p.size,0,Math.PI*2);
-    ctx.fill();
-  });
-  requestAnimationFrame(animate);
-}
-animate();
 </script>
 
 </body>
