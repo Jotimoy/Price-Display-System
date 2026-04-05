@@ -3,42 +3,86 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Research Dashboard | Smart Market Price Board</title>
+<title>Paper Review | Smart Market Price Board</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
 :root{
   --bg:#0f2027;
-  --card:#1c2b33;
   --text:white;
-  --accent:#00f5d4;
+  --card:rgba(255,255,255,0.08);
+  --accent1:#00f5d4;
+  --accent2:#f15bb5;
+}
+
+body.light{
+  --bg:#f4f6f9;
+  --text:#111;
+  --card:rgba(0,0,0,0.05);
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins',sans-serif;
+  scroll-behavior:smooth;
 }
 
 body{
-  margin:0;
-  font-family:'Poppins',sans-serif;
   background:var(--bg);
   color:var(--text);
+  transition:0.4s;
+  overflow-x:hidden;
+}
+
+canvas{
+  position:fixed;
+  top:0;
+  left:0;
+  z-index:-1;
 }
 
 nav{
+  position:fixed;
+  width:100%;
   padding:15px 8%;
   display:flex;
   justify-content:space-between;
-  background:#00000070;
-  position:sticky;
-  top:0;
+  align-items:center;
+  background:rgba(0,0,0,0.4);
+  backdrop-filter:blur(10px);
+  z-index:1000;
+}
+
+nav ul{
+  display:flex;
+  list-style:none;
+}
+
+nav ul li{
+  margin-left:25px;
 }
 
 nav a{
-  color:white;
   text-decoration:none;
-  margin-left:20px;
+  color:var(--text);
+}
+
+nav a:hover{
+  color:var(--accent1);
+}
+
+.toggle{
+  cursor:pointer;
+  padding:5px 12px;
+  background:linear-gradient(90deg,var(--accent1),var(--accent2));
+  border-radius:20px;
 }
 
 .container{
-  padding:100px 10%;
+  padding:120px 10%;
 }
 
 h1{
@@ -87,7 +131,7 @@ h1{
   margin-top:10px;
   padding:8px 15px;
   border-radius:20px;
-  background:var(--accent);
+  background:linear-gradient(90deg,var(--accent1),var(--accent2));
   color:black;
   text-decoration:none;
 }
@@ -106,20 +150,26 @@ iframe{
 footer{
   text-align:center;
   padding:20px;
-  margin-top:50px;
-  background:#00000060;
+  background:rgba(0,0,0,0.3);
+  margin-top:60px;
 }
 </style>
 </head>
 
 <body>
 
+<canvas id="particles"></canvas>
+
 <nav>
-  <h3>📊 Smart Price Board</h3>
-  <div>
-    <a href="index.html">Home</a>
-    <a href="papers.html">Papers</a>
-  </div>
+  <h3>Smart Market Price Board</h3>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="components.html">Components</a></li>
+    <li><a href="team.html">Team</a></li>
+    <li><a href="papers.html">Paper Review</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    <li><span class="toggle" onclick="toggleMode()">🌙</span></li>
+  </ul>
 </nav>
 
 <div class="container">
@@ -130,39 +180,31 @@ footer{
 <input type="text" id="search" placeholder="🔍 Search papers..." onkeyup="searchCards()">
 </div>
 
-<div class="grid" id="cards">
+<div class="grid">
+  <div class="card">
+    <h3>Overall Summary of Literature Review</h3>
+    <h3>📄 Papers 1–40</h3>
+    <p>The review of recent studies (2020–2026) in the field of Internet of Things reveals significant advancements in the development of smart systems for real-time communication, automation, and data visualization. A total of forty research papers were analyzed, focusing on IoT-based display systems, cloud integration, real-time data synchronization, and smart market applications.
 
-</div>
-<div class="card">
-  <h3>Overall Summary of Literature Review</h3>
-<h3>📄 Papers 1–40</h3>
-<p>The review of recent studies (2020–2026) in the field of Internet of Things reveals significant advancements in the development of smart systems for real-time communication, automation, and data visualization. A total of forty research papers were analyzed, focusing on IoT-based display systems, cloud integration, real-time data synchronization, and smart market applications.
-</p>
-<p>
-  The literature indicates that IoT technologies have been widely adopted to replace traditional manual systems with automated digital solutions. Several studies proposed IoT-based smart display systems such as electronic notice boards, LED display panels, and digital signage platforms. These systems commonly utilize microcontrollers such as ESP32 and Raspberry Pi, along with wireless communication technologies like WiFi and LTE, to enable remote updates and real-time information dissemination.
-</p>
-<p>
-  A major portion of the research emphasizes the use of cloud platforms and communication protocols such as MQTT and REST APIs for efficient data transmission. These technologies facilitate centralized control and ensure that multiple display units can be updated simultaneously. Additionally, studies on real-time data streaming and synchronization highlight the importance of low-latency communication and data consistency in distributed IoT environments.
-</p>
-<p></p>
-  Furthermore, several works explore advanced architectures such as edge computing and hybrid edge-cloud systems, which improve performance by reducing latency and processing data closer to the source. However, these approaches often increase system complexity and cost, making them less suitable for low-budget implementations.
-</p>
-<p>
+The literature indicates that IoT technologies have been widely adopted to replace traditional manual systems with automated digital solutions. Several studies proposed IoT-based smart display systems such as electronic notice boards, LED display panels, and digital signage platforms. These systems commonly utilize microcontrollers such as ESP32 and Raspberry Pi, along with wireless communication technologies like WiFi and LTE, to enable remote updates and real-time information dissemination.
+
+A major portion of the research emphasizes the use of cloud platforms and communication protocols such as MQTT and REST APIs for efficient data transmission. These technologies facilitate centralized control and ensure that multiple display units can be updated simultaneously. Additionally, studies on real-time data streaming and synchronization highlight the importance of low-latency communication and data consistency in distributed IoT environments.
+
+Furthermore, several works explore advanced architectures such as edge computing and hybrid edge-cloud systems, which improve performance by reducing latency and processing data closer to the source. However, these approaches often increase system complexity and cost, making them less suitable for low-budget implementations.
+
 In the context of application domains, IoT-based systems have been successfully implemented in smart cities, public information systems, agriculture, and retail analytics. These systems improve transparency, efficiency, and accessibility of information. However, most existing research primarily focuses on general-purpose display systems or monitoring platforms rather than specialized solutions for market price display.
-</p>
-<p>
-  Despite these advancements, several limitations remain evident across the literature. Many systems lack cost optimization, making them less feasible for deployment in local markets or developing regions. Scalability is another major challenge, as existing solutions often struggle to efficiently manage multiple distributed display units. Additionally, dependency on stable internet connectivity and the absence of robust error-handling mechanisms affect system reliability.
-</p>
-<p>
-  Therefore, a clear research gap exists in designing a system that combines low-cost hardware, real-time data synchronization, centralized control, and scalability specifically tailored for market environments. Addressing these challenges, the proposed project aims to develop a Smart Market Price Board, which provides an efficient, transparent, and scalable solution for real-time price display in local markets.
-</p>
-<a class="btn" href="docs/summary.pdf" target="_blank">View</a>
-<a class="btn" onclick="previewPDF('docs/summary.pdf')">Preview</a>
+
+Despite these advancements, several limitations remain evident across the literature. Many systems lack cost optimization, making them less feasible for deployment in local markets or developing regions. Scalability is another major challenge, as existing solutions often struggle to efficiently manage multiple distributed display units. Additionally, dependency on stable internet connectivity and the absence of robust error-handling mechanisms affect system reliability.
+
+Therefore, a clear research gap exists in designing a system that combines low-cost hardware, real-time data synchronization, centralized control, and scalability specifically tailored for market environments. Addressing these challenges, the proposed project aims to develop a Smart Market Price Board, which provides an efficient, transparent, and scalable solution for real-time price display in local markets.</p>
+    <a class="btn" href="docs/summary.pdf" target="_blank">View</a>
+    <a class="btn" onclick="previewPDF('docs/summary.pdf')">Preview</a>
+  </div>
 </div>
 
 </div>
 
-<div class="grid" id="cards">
+<div class="grid">
 
 <div class="card">
 <h3>Syed Hasibul Hasan</h3>
@@ -207,13 +249,48 @@ In the context of application domains, IoT-based systems have been successfully 
 
 
 <footer>
-© 2026 Smart Market Price Board | Research Project
+© 2026 Smart Market Price Board Research Project | IUB
 </footer>
 
 <script>
 
-function previewPDF(file){
-  document.getElementById("viewer").src=file;
+function toggleMode(){
+  document.body.classList.toggle("light");
+}
+
+/* Particle Background */
+const canvas=document.getElementById("particles");
+const ctx=canvas.getContext("2d");
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+
+let particles=[];
+for(let i=0;i<70;i++){
+  particles.push({
+    x:Math.random()*canvas.width,
+    y:Math.random()*canvas.height,
+    size:Math.random()*3,
+    speedX:(Math.random()-0.5),
+    speedY:(Math.random()-0.5)
+  });
+}
+
+function animate(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  particles.forEach(p=>{
+    p.x+=p.speedX;
+    p.y+=p.speedY;
+    ctx.fillStyle="#00f5d4";
+    ctx.beginPath();
+    ctx.arc(p.x,p.y,p.size,0,Math.PI*2);
+    ctx.fill();
+  });
+  requestAnimationFrame(animate);
+}
+animate();
+
+function previewPDF(url){
+  document.getElementById('viewer').src = url;
 }
 
 function searchCards(){
@@ -225,8 +302,8 @@ function searchCards(){
     card.style.display=text.includes(input)?"block":"none";
   });
 }
-
 </script>
+<script src="theme.js"></script>
 
 </body>
 </html>

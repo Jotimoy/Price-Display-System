@@ -172,17 +172,7 @@ footer{
 
 <canvas id="particles"></canvas>
 
-<nav>
-  <h3>Smart Price Board</h3>
-  <ul>
-    <li><a href="index.html">Home</a></li>
-    <li><a href="components.html">Components</a></li>
-    <li><a href="team.html">Team</a></li>
-    <li><a href="papers.html">Paper Review</a></li>
-    <li><a href="contact.html">Contact</a></li>
-    <li><span class="toggle" onclick="toggleMode()">🌙</span></li>
-  </ul>
-</nav>
+<div id="header"></div>
 
 <section>
   <h1>Meet Our Team</h1>
@@ -192,7 +182,7 @@ footer{
     <!-- Team Member 1 -->
     <div class="team-card">
       <div class="profile-img">
-        <img src="images\Syed Hasibul Hasan.jpg" alt="Syed Hasibul Hasan">
+        <img src="images/Syed Hasibul Hasan.jpg" alt="Syed Hasibul Hasan">
       </div>
       <h3 style="margin-top:15px;">Syed Hasibul Hasan</h3>
       <h2 style="margin-top:15px;">2321368</h2>
@@ -211,7 +201,7 @@ footer{
     <!-- Team Member 2 -->
      <div class="team-card">
       <div class="profile-img">
-        <img src="images\Md. Easir Arafat Porosh.jpg" alt="Md. Easir Arafat Porosh">
+        <img src="images/Md. Easir Arafat Porosh.jpg" alt="Md. Easir Arafat Porosh">
       </div>
       <h3 style="margin-top:15px;">Md. Easir Arafat Porosh</h3>
       <div class="role">Frontend Developer</div>
@@ -228,7 +218,7 @@ footer{
     <!-- Team Member 3 -->
     <div class="team-card">
       <div class="profile-img">
-        <img src="images\Turjo Roy.jpeg" alt="Turjo Roy">
+        <img src="images/Turjo Roy.jpeg" alt="Turjo Roy">
       </div>
       <h3 style="margin-top:15px;">Turjo Roy</h3>
       <div class="role">Backend Developer</div>
@@ -245,7 +235,7 @@ footer{
     <!-- Team Member 4 -->
     <div class="team-card">
       <div class="profile-img">
-        <img src="images\Rashidul Islam Alif.jpeg" alt="Rashidul Islam Alif">
+        <img src="images/Rashidul Islam Alif.jpeg" alt="Rashidul Islam Alif">
       </div>
       <h3 style="margin-top:15px;">Rashidul Islam Alif</h3>
       <div class="role">Mechanical Developer</div>
@@ -262,9 +252,7 @@ footer{
   </div>
 </section>
 
-<footer>
-© 2026 Smart Market Price Board Research Project | IUB
-</footer>
+<div id="footer"></div>
 
 <script>
 function toggleMode(){
@@ -301,8 +289,22 @@ function animate(){
   requestAnimationFrame(animate);
 }
 animate();
-</script>
 
+// Load header
+fetch('header.html')
+.then(response => response.text())
+.then(data => {
+  document.getElementById('header').innerHTML = data;
+});
+
+// Load footer
+fetch('footer.html')
+.then(response => response.text())
+.then(data => {
+  document.getElementById('footer').innerHTML = data;
+});
+</script>
+<script src="theme.js"></script>
 </body>
 
 </html>

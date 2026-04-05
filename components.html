@@ -101,8 +101,8 @@ h1{
   padding:25px;
   border-radius:20px;
   backdrop-filter:blur(12px);
-  transform:translateY(40px);
-  opacity:0;
+  transform:translateY(0);
+  opacity:1;
   transition:0.8s;
 }
 
@@ -132,17 +132,7 @@ footer{
 
 <canvas id="particles"></canvas>
 
-<nav>
-  <h3>Smart Price Board</h3>
-  <ul>
-    <li><a href="index.html">Home</a></li>
-    <li><a href="components.html">Components</a></li>
-    <li><a href="team.html">Team</a></li>
-    <li><a href="papers.html">Paper Review</a></li>
-    <li><a href="contact.html">Contact</a></li>
-    <li><span class="toggle" onclick="toggleMode()">🌙</span></li>
-  </ul>
-</nav>
+<div id="header"></div>
 
 <section>
   <h1>Hardware Components</h1>
@@ -266,9 +256,7 @@ footer{
   </div>
 </section>
 
-<footer>
-© 2026 Smart Market Price Board Research Project | IUB
-</footer>
+<div id="footer"></div>
 
 <script>
 function toggleMode(){
@@ -276,13 +264,18 @@ function toggleMode(){
 }
 
 const cards=document.querySelectorAll(".card");
-window.addEventListener("scroll",()=>{
+
+function revealCards(){
   cards.forEach(card=>{
-    if(card.getBoundingClientRect().top < window.innerHeight-50){
-      card.classList.add("show");
-    }
+    card.classList.add("show");
   });
-});
+}
+
+window.addEventListener("DOMContentLoaded", revealCards);
+window.addEventListener("load", revealCards);
+window.addEventListener("scroll", revealCards);
+window.addEventListener("resize", revealCards);
+revealCards();
 
 /* Particle Background */
 const canvas=document.getElementById("particles");
@@ -314,8 +307,22 @@ function animate(){
   requestAnimationFrame(animate);
 }
 animate();
-</script>
 
+// Load header
+fetch('header.html')
+.then(response => response.text())
+.then(data => {
+  document.getElementById('header').innerHTML = data;
+});
+
+// Load footer
+fetch('footer.html')
+.then(response => response.text())
+.then(data => {
+  document.getElementById('footer').innerHTML = data;
+});
+</script>
+<script src="theme.js"></script>
 </body>
 
 </html>

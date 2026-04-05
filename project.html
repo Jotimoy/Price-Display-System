@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Project Showcase | Smart Market Price Board</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#0f2027;
+  --text:white;
+  --card:rgba(255,255,255,0.08);
+  --accent1:#00f5d4;
+  --accent2:#f15bb5;
+}
+
+body.light{
+  --bg:#f4f6f9;
+  --text:#111;
+  --card:rgba(0,0,0,0.06);
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins',sans-serif;
+  scroll-behavior:smooth;
+}
+
+body{
+  min-height:100vh;
+  background:var(--bg);
+  color:var(--text);
+  transition:0.4s;
+  overflow-x:hidden;
+}
+
+canvas{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  z-index:-1;
+}
+
+nav{
+  position:fixed;
+  width:100%;
+  padding:15px 8%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  background:rgba(0,0,0,0.4);
+  backdrop-filter:blur(10px);
+  z-index:1000;
+}
+
+nav ul{
+  display:flex;
+  list-style:none;
+  flex-wrap:wrap;
+}
+
+nav ul li{
+  margin-left:25px;
+}
+
+nav a{
+  text-decoration:none;
+  color:var(--text);
+}
+
+nav a:hover{
+  color:var(--accent1);
+}
+
+.toggle{
+  cursor:pointer;
+  padding:5px 12px;
+  background:linear-gradient(90deg,var(--accent1),var(--accent2));
+  border-radius:20px;
+}
+
+section{
+  padding:120px 10%;
+}
+
+.hero{
+  display:grid;
+  grid-template-columns:1.2fr 0.8fr;
+  gap:40px;
+  align-items:center;
+  min-height:calc(100vh - 120px);
+}
+
+.hero-copy h1{
+  font-size:3rem;
+  line-height:1.05;
+  background: linear-gradient(90deg,var(--accent1),var(--accent2));
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+.hero-copy p{
+  margin-top:24px;
+  max-width:680px;
+  line-height:1.8;
+  opacity:0.9;
+}
+
+.hero-card{
+  background:var(--card);
+  padding:35px;
+  border-radius:28px;
+  backdrop-filter:blur(14px);
+}
+
+.hero-card h3{
+  margin-bottom:18px;
+}
+
+.feature-list{
+  list-style:none;
+}
+
+.feature-list li{
+  margin-bottom:14px;
+  padding-left:24px;
+  position:relative;
+}
+
+.feature-list li::before{
+  content:'✔';
+  position:absolute;
+  left:0;
+  color:var(--accent1);
+}
+
+.btn-group{
+  margin-top:30px;
+}
+
+.btn{
+  display:inline-block;
+  padding:12px 28px;
+  border-radius:30px;
+  text-decoration:none;
+  margin-right:15px;
+  color:white;
+  background:linear-gradient(90deg,var(--accent1),var(--accent2));
+  transition:0.4s;
+}
+
+.btn:hover{
+  transform:scale(1.05);
+}
+
+.section-header{
+  max-width:820px;
+}
+
+.section-header h2{
+  font-size:2.5rem;
+}
+
+.section-header p{
+  margin-top:18px;
+  line-height:1.8;
+  opacity:0.9;
+}
+
+.card-container{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:30px;
+  margin-top:40px;
+}
+
+.card{
+  background:var(--card);
+  padding:28px;
+  border-radius:24px;
+  backdrop-filter:blur(12px);
+  transition:0.4s;
+}
+
+.card h3{
+  margin-bottom:16px;
+}
+
+.card p{
+  line-height:1.75;
+  opacity:0.95;
+}
+
+.diagram-grid,
+.media-grid{
+  display:grid;
+  gap:30px;
+  margin-top:40px;
+}
+
+.diagram-grid{
+  grid-template-columns:1fr 0.9fr;
+}
+
+.diagram-card{
+  background:var(--card);
+  padding:32px;
+  border-radius:28px;
+  backdrop-filter:blur(12px);
+}
+
+.diagram-visual{
+  background:rgba(255,255,255,0.06);
+  border:1px solid rgba(255,255,255,0.1);
+  border-radius:28px;
+  padding:32px;
+  min-height:420px;
+  display:grid;
+  place-items:center;
+}
+
+.diagram-visual svg{
+  width:100%;
+  height:auto;
+}
+
+.media-grid{
+  grid-template-columns:1fr 1fr;
+}
+
+.media-card{
+  background:var(--card);
+  border-radius:28px;
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+}
+
+.media-card img,
+.media-card video{
+  width:100%;
+  display:block;
+}
+
+.media-card .media-meta{
+  padding:24px;
+}
+
+.media-card .media-meta h3{
+  margin-bottom:12px;
+}
+
+.media-card .media-meta p{
+  line-height:1.7;
+  opacity:0.9;
+}
+
+.grid-highlight{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(200px,1fr));
+  gap:24px;
+  margin-top:40px;
+}
+
+.highlight{
+  background:rgba(0,245,212,0.12);
+  border:1px solid rgba(0,245,212,0.25);
+  padding:28px;
+  border-radius:24px;
+}
+
+.highlight h3{
+  margin-bottom:14px;
+}
+
+footer{
+  text-align:center;
+  padding:20px;
+  background:rgba(0,0,0,0.3);
+  margin-top:60px;
+}
+
+@media(max-width:980px){
+  .hero{grid-template-columns:1fr;}
+  .diagram-grid,
+  .media-grid{grid-template-columns:1fr;}
+}
+
+@media(max-width:680px){
+  nav{padding:18px 6%;}
+  section{padding:100px 6%;}
+  .hero-copy h1{font-size:2.5rem;}
+}
+</style>
+</head>
+
+<body>
+
+<canvas id="particles"></canvas>
+
+<div id="header"></div>
+
+<section class="hero">
+  <div class="hero-copy">
+    <p class="eyebrow">Project Showcase</p>
+    <h1>Smart Market Price Board Methodology & Demo</h1>
+    <p>Discover the research workflow, system architecture, and live implementation evidence behind our smart market price display solution. The page highlights methodology, diagrams, project visuals, and a demo video for easy understanding.</p>
+    <div class="btn-group">
+      <a href="proposal.pdf" class="btn">📄 Download Proposal</a>
+      <a href="components.html" class="btn">View Components</a>
+    </div>
+  </div>
+  <div class="hero-card">
+    <h3>Page Highlights</h3>
+    <ul class="feature-list">
+      <li>Research methodology explained step-by-step</li>
+      <li>System block diagram and architecture</li>
+      <li>Project visuals and real implementation evidence</li>
+      <li>Demo video showing the final system in action</li>
+    </ul>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-header">
+    <h2>Research Methodology</h2>
+    <p>This page presents the core steps our project followed, from requirement analysis to implementation and evaluation. The design is built to make the process easy to understand at a glance.</p>
+  </div>
+
+  <div class="card-container">
+    <div class="card">
+      <h3>1. Requirement Analysis</h3>
+      <p>We studied existing market display systems and identified the need for a centralized, low-cost, and real-time price update platform tailored for local market environments.</p>
+    </div>
+    <div class="card">
+      <h3>2. System Design</h3>
+      <p>The architecture was split into three layers: the admin dashboard, cloud communication, and the IoT-enabled display board for market screens.</p>
+    </div>
+    <div class="card">
+      <h3>3. Prototyping</h3>
+      <p>Hardware prototypes using ESP32/ESP8266, LED display units, and sensors were built to verify reliable price transmission and board update behavior.</p>
+    </div>
+    <div class="card">
+      <h3>4. Validation</h3>
+      <p>Real-world functionality was tested by updating prices centrally and confirming that market boards synchronized instantly while maintaining readability and performance.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-header">
+    <h2>System Block Diagram</h2>
+    <p>The diagram below shows the message flow from the admin panel through WiFi to the ESP32 microcontroller and finally to the display board.</p>
+  </div>
+
+  <div class="diagram-grid">
+    <div class="diagram-visual">
+      <svg viewBox="0 0 1100 500" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <marker id="arrow" markerWidth="12" markerHeight="12" refX="11" refY="6" orient="auto">
+            <path d="M0 0 L12 6 L0 12 Z" fill="#00f5d4" />
+          </marker>
+        </defs>
+
+        <rect x="60" y="180" width="240" height="140" rx="24" fill="#0b2d36" stroke="#00f5d4" stroke-width="4"/>
+        <text x="180" y="230" fill="#fff" font-size="24" font-weight="700" text-anchor="middle">Admin Panel</text>
+        <text x="180" y="270" fill="#fff" font-size="16" text-anchor="middle">Price management</text>
+
+        <rect x="420" y="90" width="260" height="140" rx="24" fill="#0b2d36" stroke="#f15bb5" stroke-width="4"/>
+        <text x="550" y="140" fill="#fff" font-size="24" font-weight="700" text-anchor="middle">WiFi Communication</text>
+        <text x="550" y="180" fill="#fff" font-size="16" text-anchor="middle">ESP32 link</text>
+
+        <rect x="760" y="180" width="240" height="140" rx="24" fill="#0b2d36" stroke="#00f5d4" stroke-width="4"/>
+        <text x="880" y="230" fill="#fff" font-size="24" font-weight="700" text-anchor="middle">ESP32 Microcontroller</text>
+        <text x="880" y="270" fill="#fff" font-size="16" text-anchor="middle">Data processing</text>
+
+        <path d="M300 250 C360 250 360 220 420 220" fill="none" stroke="#00f5d4" stroke-width="5" marker-end="url(#arrow)"/>
+        <path d="M680 220 C740 220 740 250 760 250" fill="none" stroke="#00f5d4" stroke-width="5" marker-end="url(#arrow)"/>
+
+        <rect x="430" y="340" width="260" height="120" rx="24" fill="#0b2d36" stroke="#f15bb5" stroke-width="4"/>
+        <text x="560" y="385" fill="#fff" font-size="24" font-weight="700" text-anchor="middle">LCD Display</text>
+        <text x="560" y="420" fill="#fff" font-size="16" text-anchor="middle">Price board output</text>
+
+        <path d="M880 320 C880 340 750 360 690 360" fill="none" stroke="#00f5d4" stroke-width="5" marker-end="url(#arrow)"/>
+      </svg>
+    </div>
+    <div class="diagram-card">
+      <h3>Architecture highlights</h3>
+      <p>The project uses an admin panel that sends price information via WiFi to an ESP32 microcontroller. The ESP32 processes updates and pushes them to the LCD display board in real time.</p>
+      <div class="highlight">
+        <h3>Key components</h3>
+        <p>Admin interface, WiFi communication link, ESP32 controller, and LCD market display.</p>
+      </div>
+      <div class="highlight">
+        <h3>Benefits</h3>
+        <p>Reliable wireless delivery, low-cost hardware, and instant price updates for market boards.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-header">
+    <h2>Hardware Wiring Diagram</h2>
+    <p>Detailed connection flow between the ESP32 module, LED display panel, and power source used in the real implementation.</p>
+  </div>
+
+  <div class="diagram-grid">
+    <div class="diagram-visual">
+      <img src="images/block-diagram.png" alt="ESP32 wiring block diagram">
+    </div>
+    <div class="diagram-card">
+      <h3>ESP32 wiring details</h3>
+      <p>This hardware diagram illustrates how the ESP32 is connected to the LED display panel and the power source. The ESP32 controls the display through GPIO signal lines while the power module supplies stable 5V and ground to both devices.</p>
+      <div class="highlight">
+        <h3>Signal connections</h3>
+        <p>Data and control pins from the ESP32 are mapped to the display module for reliable refresh and update timing.</p>
+      </div>
+      <div class="highlight">
+        <h3>Power distribution</h3>
+        <p>The power supply feeds both the ESP32 and the LED display, ensuring the display receives stable voltage during full-panel updates.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-header">
+    <h2>Project Visuals</h2>
+    <p>Live evidence from the implementation: a working setup, the user interface, and the video walkthrough illustrate the final product clearly.</p>
+  </div>
+
+  <div class="media-grid">
+    <div class="media-card">
+      <img src="images/project-screenshot.svg" alt="Project screenshot placeholder">
+      <div class="media-meta">
+        <h3>Project image</h3>
+        <p>This visual mockup represents the final market display and hardware assembly used in the implementation phase.</p>
+      </div>
+    </div>
+    <div class="media-card">
+      <video controls src="typing.mov"></video>
+      <div class="media-meta">
+        <h3>Demo video</h3>
+        <p>Watch the system in action as it updates prices and displays the result on a live digital board.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-header">
+    <h2>Impact & Benefits</h2>
+    <p>These research outcomes show how the Smart Market Price Board improves market transparency, reduces price update delays, and creates a reliable information system.</p>
+  </div>
+
+  <div class="grid-highlight">
+    <div class="highlight">
+      <h3>Real-time updates</h3>
+      <p>The system instantly broadcasts new commodity prices to all connected display boards from one central source.</p>
+    </div>
+    <div class="highlight">
+      <h3>Cost-effective</h3>
+      <p>Designed for low-budget deployment using affordable IoT components and lightweight communication protocols.</p>
+    </div>
+    <div class="highlight">
+      <h3>Scalable</h3>
+      <p>The architecture supports multiple market boards with a single backend, enabling future expansion.</p>
+    </div>
+    <div class="highlight">
+      <h3>User-friendly</h3>
+      <p>Simple admin controls and an intuitive display make the system easy to manage for market operators.</p>
+    </div>
+  </div>
+</section>
+
+<div id="footer"></div>
+
+<script>
+function toggleMode(){
+  document.body.classList.toggle("light");
+}
+
+const canvas=document.getElementById("particles");
+const ctx=canvas.getContext("2d");
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+
+let particles=[];
+for(let i=0;i<70;i++){
+  particles.push({
+    x:Math.random()*canvas.width,
+    y:Math.random()*canvas.height,
+    size:Math.random()*3,
+    speedX:(Math.random()-0.5),
+    speedY:(Math.random()-0.5)
+  });
+}
+
+function animate(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  particles.forEach(p=>{
+    p.x+=p.speedX;
+    p.y+=p.speedY;
+    if(p.x<0)p.x=canvas.width;
+    if(p.x>canvas.width)p.x=0;
+    if(p.y<0)p.y=canvas.height;
+    if(p.y>canvas.height)p.y=0;
+    ctx.fillStyle="#00f5d4";
+    ctx.beginPath();
+    ctx.arc(p.x,p.y,p.size,0,Math.PI*2);
+    ctx.fill();
+  });
+  requestAnimationFrame(animate);
+}
+animate();
+
+window.addEventListener('resize', () => {
+  canvas.width=window.innerWidth;
+  canvas.height=window.innerHeight;
+});
+
+fetch('header.html')
+.then(response => response.text())
+.then(data => {
+  document.getElementById('header').innerHTML = data;
+});
+
+fetch('footer.html')
+.then(response => response.text())
+.then(data => {
+  document.getElementById('footer').innerHTML = data;
+});
+</script>
+<script src="theme.js"></script>
+</body>
+</html>
