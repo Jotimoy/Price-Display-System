@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Final Project | Smart Market Price Board</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#0f2027;
+  --text:white;
+  --card:rgba(255,255,255,0.08);
+  --accent1:#00f5d4;
+  --accent2:#f15bb5;
+}
+
+body.light{
+  --bg:#f4f6f9;
+  --text:#111;
+  --card:rgba(0,0,0,0.06);
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins',sans-serif;
+  scroll-behavior:smooth;
+}
+
+body{
+  min-height:100vh;
+  background:var(--bg);
+  color:var(--text);
+  transition:0.4s;
+  overflow-x:hidden;
+}
+
+canvas{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  z-index:-1;
+}
+
+nav{
+  position:fixed;
+  width:100%;
+  padding:15px 8%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  background:rgba(0,0,0,0.4);
+  backdrop-filter:blur(10px);
+  z-index:1000;
+}
+
+nav ul{
+  display:flex;
+  list-style:none;
+  flex-wrap:wrap;
+}
+
+nav ul li{
+  margin-left:25px;
+}
+
+nav a{
+  text-decoration:none;
+  color:var(--text);
+}
+
+nav a:hover{
+  color:var(--accent1);
+}
+
+.toggle{
+  cursor:pointer;
+  padding:5px 12px;
+  background:linear-gradient(90deg,var(--accent1),var(--accent2));
+  border-radius:20px;
+}
+
+section{
+  padding:120px 10%;
+}
+
+.hero{
+  display:grid;
+  grid-template-columns:1.2fr 0.8fr;
+  gap:40px;
+  align-items:center;
+  min-height:calc(100vh - 120px);
+}
+
+.hero-copy h1{
+  font-size:2.5rem;
+  background: linear-gradient(90deg,var(--accent1),var(--accent2));
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+.hero-copy h2{
+  margin-top:15px;
+  font-weight:400;
+  opacity:0.9;
+}
+
+.hero-copy p{
+  margin-top:25px;
+  line-height:1.7;
+}
+
+.btn-group{
+  margin-top:30px;
+}
+
+.btn{
+  display:inline-block;
+  padding:12px 28px;
+  border-radius:30px;
+  text-decoration:none;
+  margin-right:15px;
+  color:white;
+  background:linear-gradient(90deg,var(--accent1),var(--accent2));
+  transition:0.4s;
+}
+
+.btn:hover{
+  transform:scale(1.08);
+}
+
+.card-container{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  gap:30px;
+  margin-top:40px;
+}
+
+.card{
+  background:var(--card);
+  padding:25px;
+  border-radius:20px;
+  backdrop-filter:blur(12px);
+  transition:0.5s;
+}
+
+.card:hover{
+  transform:translateY(-10px);
+}
+
+.video-container{
+  position:relative;
+  padding-bottom:56.25%;
+  height:0;
+  overflow:hidden;
+  border-radius:20px;
+}
+
+.video-container iframe{
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+}
+
+footer{
+  text-align:center;
+  padding:20px;
+  background:rgba(0,0,0,0.3);
+  margin-top:60px;
+}
+</style>
+</head>
+
+<body>
+
+<canvas id="particles"></canvas>
+
+<nav>
+  <h3>Smart Market Price Board</h3>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="components.html">Components</a></li>
+    <li><a href="project.html">Project</a></li>
+    <li><a href="final-project.html">Final Project</a></li>
+    <li><a href="team.html">Team</a></li>
+    <li><a href="papers.html">Paper Review</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    <li><span class="toggle" onclick="toggleMode()">🌙</span></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="hero-copy">
+    <h1>Final Project Deliverables</h1>
+    <h2>Complete Implementation and Documentation</h2>
+    <p>
+      Explore the final outputs of our IoT-Based Smart Market Price Display System project,
+      including the IEEE conference paper, presentation materials, and demonstration videos.
+    </p>
+  </div>
+  <div class="hero-image">
+    <img src="images/project.jpeg" alt="Final Project" style="width:100%; border-radius:20px;">
+  </div>
+</section>
+
+<section>
+  <h2>IEEE Conference Paper (Preview)</h2>
+  <div class="card">
+    <p>Access the preview of our IEEE conference paper detailing the design and implementation of the IoT-based smart market price display system.</p>
+    <br>
+    <a href="docs/IEEE_Conference_Template.pdf" class="btn" target="_blank">📄 View Paper Preview</a>
+  </div>
+</section>
+
+<section>
+  <h2>Presentation Slide</h2>
+  <div class="card">
+    <p>View the presentation slides used for the project demonstration and defense.</p>
+    <br>
+    <a href="docs/IoT_Market_Price_Synchronization.pdf" class="btn" target="_blank">📊 View Slides</a>
+  </div>
+</section>
+
+<section>
+  <h2>Presentation Video</h2>
+  <div class="card">
+    <p>Watch the video presentation explaining the project methodology, implementation, and results.</p>
+    <br>
+    <div class="video-container">
+      <iframe src="https://www.youtube.com/embed/P8CD63b2qIo" frameborder="0" allowfullscreen></iframe>
+    </div>
+    <div class="video-container">
+      <iframe src="https://www.youtube.com/embed/bTHLJ6XRHes" frameborder="0" allowfullscreen></iframe>
+    </div>
+    <div class="video-container">
+      <iframe src="https://www.youtube.com/embed/LW5ucnyozX4" frameborder="0" allowfullscreen></iframe>
+    </div>
+    <div class="video-container">
+      <iframe src="https://www.youtube.com/embed/f8A-0LFLdwk" frameborder="0" allowfullscreen></iframe>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Demonstration Video</h2>
+  <div class="card">
+    <p>See the system in action with a live demonstration of the IoT-based price display functionality.</p>
+    <br>
+    <div class="video-container">
+      <iframe src="https://www.youtube.com/embed/W1XDn_OBepY" frameborder="0" allowfullscreen></iframe>
+    </div>
+    <div class="video-container">
+      <iframe src="https://www.youtube.com/embed/UpUQjmlClUU" frameborder="0" allowfullscreen></iframe>
+    </div>
+    <div class="video-container">
+      <iframe src="https://www.youtube.com/embed/mFGpjJJRQj8" frameborder="0" allowfullscreen></iframe>
+    </div>
+    <div class="video-container">
+      <iframe src="https://www.youtube.com/embed/iXO660QN2xY" frameborder="0" allowfullscreen></iframe>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>&copy; 2024 Smart Market Price Board. All rights reserved.</p>
+</footer>
+
+<script>
+function toggleMode(){
+  document.body.classList.toggle("light");
+}
+
+/* Particle Background */
+const canvas=document.getElementById("particles");
+const ctx=canvas.getContext("2d");
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+
+let particles=[];
+for(let i=0;i<70;i++){
+  particles.push({
+    x:Math.random()*canvas.width,
+    y:Math.random()*canvas.height,
+    size:Math.random()*3,
+    speedX:(Math.random()-0.5),
+    speedY:(Math.random()-0.5)
+  });
+}
+
+function animate(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  particles.forEach(p=>{
+    p.x+=p.speedX;
+    p.y+=p.speedY;
+    ctx.fillStyle="#00f5d4";
+    ctx.beginPath();
+    ctx.arc(p.x,p.y,p.size,0,Math.PI*2);
+    ctx.fill();
+  });
+  requestAnimationFrame(animate);
+}
+animate();
+</script>
+<script src="theme.js"></script>
+
+</body>
+</html>
